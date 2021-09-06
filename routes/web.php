@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'AdminController@index')->name('home');
+Route::group(
+    ['middleware' => ['auth', 'ceklevel:0']],
+    function () {
+        Route::get('/', 'AdminController@index')->name('home');
+    }
+);

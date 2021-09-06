@@ -51,7 +51,7 @@
   <div class="col-md-12">
     <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Title</h3>
+              <h3 class="box-title">Maps</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
               </div>
@@ -63,11 +63,10 @@
   </div><!-- /.col -->
 @endsection
 @push('customScripts')
-  
-{{-- <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script> --}}
 <script>
   let marker = [-4.96235131753212, 105.10924923338737]
   var map = L.map('map').setView(marker, 9);
+
 
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -75,38 +74,16 @@
         id: 'mapbox/streets-v11',
         accessToken: 'pk.eyJ1IjoiZHdpcjQiLCJhIjoiY2syeGZhOG0zMGFjMjNuczg1MXJ1M3ptayJ9.m4xcIOu0VAbXgcmXqHnWDQ'
     }).addTo(map)
-    
-  // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  // }).addTo(map);
-  
-  let start = L.marker(marker).addTo(map)
-          .bindPopup('sdaasld')
-          .openPopup();
 
-  async function  getDetailLocation(lat, lng){
-    return new Promise ((resolve, reject) =>{
-      fetch(`https://open.mapquestapi.com/nominatim/v1/reverse.php?key=9cPKAwseGzcvTzZgbQ2prBC02kDPvPcY&format=json&lat=${lat}&lon=${lng}`)
-        .then(res =>{
-          res.json().then(result =>{
-            resolve(result)
-          })
-        })
-    })
-  }
+  let jasa = <?php echo JSON_encode($data); ?>;
 
-  map.on('click', async function(e) {
-    const detail = await getDetailLocation(e.latlng.lat, e.latlng.lng).then()
-      fetch('https://open.mapquestapi.com/nominatim/v1/reverse.php?key=9cPKAwseGzcvTzZgbQ2prBC02kDPvPcY&format=json&lat=-5.414363197257652&lon=105.29030799865724')
-      .then(res =>{
-        res.json().then( result => {
-        map.removeLayer(start)
-          marker = [e.latlng.lat, e.latlng.lng]
-          start = L.marker(marker).addTo(map)
-          .bindPopup(detail.display_name +' lat : ' + detail.lat + ' lng : ' + detail.lon)
-          .openPopup()
-        })
-      })
-  })
+  for (i in jasa) {
+    Options = {
+        'maxWidth': '500',
+        'className': 'custom'
+    };
+    customPopup = "<b>Nama Jasa : </b>" + jasa[i].fullname + "<br><b>Alamat : </b>" + jasa[i].address;
+    start = L.marker([jasa[i].lati, jasa[i].longi]).addTo(map).bindPopup(customPopup, Options)
+    }
 </script>
 @endpush

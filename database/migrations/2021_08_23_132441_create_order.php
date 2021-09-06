@@ -15,12 +15,14 @@ class CreateOrder extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('product_id')->Nullable();
             $table->string('order_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->string('namaMobil')->nullable();
             $table->string('plat')->nullable();
             $table->double('harga')->nullable();
             $table->string('img')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

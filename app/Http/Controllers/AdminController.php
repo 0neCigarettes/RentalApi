@@ -24,8 +24,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = $this->getUser();
-        return view('admin.index');
+        $data = User::where('role', '=', 2)->get()->toArray();
+        return view('admin.index')->with(['data' => $data]);
     }
 
     public function getDataUser()
