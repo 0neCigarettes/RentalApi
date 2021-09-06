@@ -21,9 +21,7 @@ class AuthController extends Controller
                 return User::where($key, $value)->count();
             };
 
-            if (verify('nik', $request->nik) > 0) {
-                return $this->GagalWithMsg("Nik sudah digunakan !");
-            } else if (verify('username', $request->username) > 0) {
+            if (verify('username', $request->username) > 0) {
                 return $this->GagalWithMsg("Username sudah digunakan !");
             } else if (verify('email', $request->email) > 0) {
                 return $this->GagalWithMsg("Email sudah digunakan !");
