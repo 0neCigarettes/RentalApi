@@ -23,10 +23,10 @@ class User extends Authenticatable
         'phone',
         'address',
         'profilephoto',
-        'plat',
+        'role',
         'status',
-        'lat',
-        'lng'
+        'lati',
+        'lngi'
     ];
 
     /**

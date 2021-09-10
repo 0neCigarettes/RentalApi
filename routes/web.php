@@ -27,5 +27,18 @@ Route::group(
     ['middleware' => ['auth', 'ceklevel:0']],
     function () {
         Route::get('/', 'AdminController@index')->name('home');
+
+        //hapus user
+        Route::get('/delete/{id}', 'AdminController@deleteUser')->name('hapusUser');
+        Route::get('/resetpassword/{id}', 'AdminController@resetPwd')->name('resetPwd');
+
+        //jasa
+        Route::get('/jasarental', 'AdminController@getJasaRental')->name('jasa');
+        Route::get('/editjasa/{id}', 'AdminController@editJasa')->name('editJasa');
+        Route::post('/updatejasa/{id}', 'AdminController@updateJasaRental')->name('updateJasa');
+        Route::get('/rubahstatus/{id}/{status}', 'AdminController@changeStatus')->name('status');
+
+        //customer
+        Route::get('/customer', 'AdminController@getCustomer')->name('customer');
     }
 );

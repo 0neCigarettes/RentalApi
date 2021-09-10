@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Rental Apss</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -28,6 +28,8 @@
     <link href="{{ url('master/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="{{ url('master/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ url('master/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,8 +67,38 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    {{-- data-tabel --}}
+    <script src="{{ url('master/plugins/datatables/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+    <script src="{{ url('master/plugins/datatables/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
+
     <script type="text/javascript">
       $.widget.bridge('uibutton', $.ui.button);
+    </script>
+     <script type="text/javascript">
+      $(function () {
+        $("#example1").DataTable({"paging": false});
+        $('#example2').DataTable({
+          "paging": false,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": true,
+        });
+      });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function konfirmasi () {
+            var pilihan = confirm ("Apakah Anda Yakin ?");
+            if(pilihan)
+			{
+                return true
+            }else
+				{
+                alert ("Proses Di Batalkan")
+                return false
+                }
+			}
     </script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="{{ url('master/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
@@ -97,7 +129,6 @@
     <script src="{{ url('master/dist/js/pages/dashboard.js')}}" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ url('master/dist/js/demo.js')}}" type="text/javascript"></script>
-
     @stack('customScripts')
   </body>
 </html>

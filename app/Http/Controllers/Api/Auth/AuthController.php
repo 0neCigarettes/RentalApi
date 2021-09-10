@@ -28,7 +28,12 @@ class AuthController extends Controller
             } else {
                 $req = $request->all();
                 $req["password"] = Hash::make($request->password);
+                // $req['role'] = (int)$request->role;
 
+                // return ([
+                //     'status' => false,
+                //     'msg' => json_encode($req)
+                // ]);
                 $data = User::create($req);
                 if ($data) {
                     return $this->Sukses();
@@ -37,7 +42,11 @@ class AuthController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return $this->ErrorServer($e->getMessage());
+            // return $this->ErrorServer($e->getMessage());
+            return json_encode([
+                'status' => false,
+                'msg' => json_encode($e->getMessage())
+            ]);
         }
     }
 

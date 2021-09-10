@@ -1,15 +1,5 @@
 @extends('layouts.mainLayout')
 @section('css')
-{{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script>
-    let map;
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-      });
-    }
-  </script> --}}
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
@@ -17,15 +7,13 @@
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""></script>
 
-
-
   <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
   />
 
   <style>
-      #map { height: 650px; }
+      #maps { height: 650px; }
       #menu {
         position: top;
         background: #efefef;
@@ -57,7 +45,7 @@
               </div>
             </div>
             <div class="box-body">
-              <div id="map"></div>
+              <div id="maps"></div>
             </div><!-- /.box-body -->
           </div><!-- /.box -->
   </div><!-- /.col -->
@@ -65,7 +53,7 @@
 @push('customScripts')
 <script>
   let marker = [-4.96235131753212, 105.10924923338737]
-  var map = L.map('map').setView(marker, 9);
+  let map = L.map('maps').setView(marker, 9);
 
 
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -83,7 +71,7 @@
         'className': 'custom'
     };
     customPopup = "<b>Nama Jasa : </b>" + jasa[i].fullname + "<br><b>Alamat : </b>" + jasa[i].address;
-    start = L.marker([jasa[i].lati, jasa[i].longi]).addTo(map).bindPopup(customPopup, Options)
+    start = L.marker([jasa[i].lati, jasa[i].longi]).addTo(map).bindPopup(customPopup, Options);
     }
 </script>
 @endpush

@@ -8,6 +8,14 @@ use Illuminate\Support\Str;
 
 trait ResponseController
 {
+  public function SuksesAction($s, $m)
+  {
+    return [
+      'action' => true,
+      'sukses' => $s,
+      'msg' => $m
+    ];
+  }
   public function SuksesWithData($result)
   {
     return response()
