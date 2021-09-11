@@ -13,7 +13,7 @@
   />
 
   <style>
-      #maps { height: 650px; }
+      #maps { height: 550px; }
       #menu {
         position: top;
         background: #efefef;
