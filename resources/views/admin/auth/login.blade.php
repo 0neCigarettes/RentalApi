@@ -37,18 +37,11 @@
           cek kembali email/password anda !
         </div>
       @enderror
-      @error('password')
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <h4><i class="icon fa fa-ban"></i> Peringatan!</h4>
-          cek kembali email anda !
-        </div>
-      @enderror
       <form action="{{ route('login') }}" method="POST">
         @csrf
 
         <div class="form-group has-feedback">
-          <input type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+          <input type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus />
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
@@ -56,8 +49,8 @@
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
-          <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+          <div class="col-md-4 justify-center">
+            <button style="border-radius: 10px" type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
           </div><!-- /.col -->
         </div>
       </form>
